@@ -1,11 +1,14 @@
 package com.projectudemy.profnelioalves.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +24,11 @@ public class User implements Serializable{
     private String password;
     private String phone;
 
+    @OneToMany(mappedBy = "client")
+    // This annotation indicates that this field is a one-to-many relationship
+    private List<Order> order = new ArrayList<>();
+
+   
 
     public User() {
     }
@@ -71,6 +79,10 @@ public class User implements Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+ 
+    public List<Order> getOrder() {
+        return order;
     }
 
     @Override
