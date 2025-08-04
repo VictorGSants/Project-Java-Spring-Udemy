@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projectudemy.profnelioalves.entities.enuns.OrderStatus;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -27,6 +28,8 @@ public class order implements Serializable {
     // and sets the timezone to GMT
     private Instant moment;
 
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     // This annotation indicates that this field is a foreign key
@@ -35,9 +38,10 @@ public class order implements Serializable {
 
     public order() {}
 
-    public order(Long id, Instant moment, User client) {
+    public order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
+        setStatus(orderStatus);
         this.client = client;
     }
 
@@ -59,6 +63,18 @@ public class order implements Serializable {
 
     public User getClient() {
         return client;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setStatus(OrderStatus orderStatus) {
+        if (orderStatus == null) {
+            throw new IllegalArgumentException("OrderStatus cannot be null");
+            
+        }
+        this.orderStatus = orderStatus.getCode();
     }
 
     public void setClient(User client) {

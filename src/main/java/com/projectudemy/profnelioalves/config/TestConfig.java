@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.projectudemy.profnelioalves.entities.order;
+import com.projectudemy.profnelioalves.entities.enuns.OrderStatus;
 import com.projectudemy.profnelioalves.entities.User;
 import com.projectudemy.profnelioalves.repositories.UserRepositoriy;
 import com.projectudemy.profnelioalves.repositories.OrderRepository;
@@ -35,10 +36,10 @@ public class TestConfig<Z> implements CommandLineRunner{
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
 
-        order o1 = new order(null, Instant.parse("2019-07-20T19:53:07Z"), u1);
+        order o1 = new order(null, Instant.parse("2019-07-20T19:53:07Z"), OrderStatus.PAID, u1);
         // This creates a new order with a specific date and associates it with user u1
-        order o2 = new order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-        order o3 = new order(null, Instant.parse("2019-07-22T15:21:22Z"), u1); 
+        order o2 = new order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT,  u2);
+        order o3 = new order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1); 
         
         userRepositoriy.saveAll(Arrays.asList(u1, u2));
         // Aqui, estamos salvando dois usuários no repositório de usuários
