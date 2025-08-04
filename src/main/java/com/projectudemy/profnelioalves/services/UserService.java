@@ -34,8 +34,7 @@ public class UserService {
         Optional<User> obj = userRepositoriy.findById(id);
         return obj.get();
         // esse método busca um usuário pelo ID
-     
-
+        
     }
     
 }

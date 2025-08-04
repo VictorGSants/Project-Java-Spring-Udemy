@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +26,11 @@ public class User implements Serializable{
     private String password;
     private String phone;
 
+    @JsonIgnore
+
     @OneToMany(mappedBy = "client")
     // This annotation indicates that this field is a one-to-many relationship
-    private List<Order> order = new ArrayList<>();
+    private List<order> order = new ArrayList<>();
 
    
 
@@ -81,7 +85,7 @@ public class User implements Serializable{
         this.phone = phone;
     }
  
-    public List<Order> getOrder() {
+    public List<order> getOrder() {
         return order;
     }
 

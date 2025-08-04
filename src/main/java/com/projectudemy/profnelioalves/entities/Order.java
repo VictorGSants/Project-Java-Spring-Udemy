@@ -3,6 +3,8 @@ package com.projectudemy.profnelioalves.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,13 +15,16 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class order implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    // This annotation formats the date to a specific pattern
+    // and sets the timezone to GMT
     private Instant moment;
 
     @ManyToOne
@@ -28,9 +33,9 @@ public class Order implements Serializable {
     // and it references the User entity
     private User client;
 
-    public Order() {}
+    public order() {}
 
-    public Order(Long id, Instant moment, User client) {
+    public order(Long id, Instant moment, User client) {
         this.id = id;
         this.moment = moment;
         this.client = client;
@@ -76,7 +81,7 @@ public class Order implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Order other = (Order) obj;
+        order other = (order) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
