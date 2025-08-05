@@ -6,12 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
-
-
-
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "tb_category")
@@ -23,6 +22,8 @@ public class Category implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Transient
+    private Set<Product> products = new HashSet<>();
 
     public Category() {}
 
@@ -37,6 +38,12 @@ public class Category implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
+    public Set<Product> getProducts() {
+        return products;
+        // This method returns the set of products associated with this category
+
+    }
+
     public String getName() {
         return name;
     }
