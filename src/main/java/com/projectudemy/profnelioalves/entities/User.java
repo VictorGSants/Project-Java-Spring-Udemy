@@ -27,13 +27,14 @@ public class User implements Serializable{
     private String phone;
 
     @JsonIgnore
+    // This annotation prevents the order list from being serialized to JSON
+    // to avoid infinite recursion in case of bidirectional relationships
 
     @OneToMany(mappedBy = "client")
     // This annotation indicates that this field is a one-to-many relationship
     private List<order> order = new ArrayList<>();
 
    
-
     public User() {
     }
 
