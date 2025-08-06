@@ -21,7 +21,7 @@ public class OrderItem implements java.io.Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(order Order, Product product, Integer quantity, Double price) {
+    public OrderItem(Order Order, Product product, Integer quantity, Double price) {
         id.setOrder(Order);
         id.setProduct(product);
        // id = new OrderItemPK(); // Ensure id is initialized
@@ -29,11 +29,11 @@ public class OrderItem implements java.io.Serializable {
         this.price = price;
     }
     @JsonIgnore
-    public order getOrder(){
+    public Order getOrder(){
         return id.getOrder();
     } 
 
-    public void setOrder(order Order){
+    public void setOrder(Order Order){
         id.setOrder(Order);
     }
 

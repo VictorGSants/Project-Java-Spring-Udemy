@@ -10,16 +10,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import java.util.Set;
 import java.util.HashSet;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name = "tb_order")
-public class order implements Serializable {
+public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -44,9 +46,13 @@ public class order implements Serializable {
     // This annotation indicates that this field is a one-to-many relationship
     private Set<OrderItem> itens = new HashSet<>();
 
-    public order() {}
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    // mapeando a entidade para ter o mesmo id da order
+    private Payment payment;
 
-    public order(Long id, Instant moment, OrderStatus orderStatus, User client) {
+    public Order() {}
+
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
         setStatus(orderStatus);
@@ -76,6 +82,9 @@ public class order implements Serializable {
     public OrderStatus getStatus() {
         return OrderStatus.valueOf(orderStatus);
     }
+    
+
+ 
 
     public void setStatus(OrderStatus orderStatus) {
         if (orderStatus == null) {
@@ -92,6 +101,13 @@ public class order implements Serializable {
         return itens;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
     @Override
     public int hashCode() {
@@ -109,7 +125,7 @@ public class order implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        order other = (order) obj;
+        Order other = (Order) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

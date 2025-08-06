@@ -32,7 +32,7 @@ public class User implements Serializable{
 
     @OneToMany(mappedBy = "client")
     // This annotation indicates that this field is a one-to-many relationship
-    private List<order> order = new ArrayList<>();
+    private List<Order> order = new ArrayList<>();
 
    
     public User() {
@@ -86,7 +86,7 @@ public class User implements Serializable{
         this.phone = phone;
     }
  
-    public List<order> getOrder() {
+    public List<Order> getOrder() {
         return order;
     }
 

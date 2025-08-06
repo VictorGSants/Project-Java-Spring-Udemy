@@ -3,7 +3,7 @@ package com.projectudemy.profnelioalves.entities.PK;
 import java.io.Serializable;
 
 
-import com.projectudemy.profnelioalves.entities.order;
+import com.projectudemy.profnelioalves.entities.Order;
 
 import com.projectudemy.profnelioalves.entities.Product;
 
@@ -21,7 +21,7 @@ public class OrderItemPK implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private order order;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -29,10 +29,10 @@ public class OrderItemPK implements Serializable {
 
   
 
-    public order getOrder() {
+    public Order getOrder() {
         return order;
     }
-    public void setOrder(order order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
     public Product getProduct() {

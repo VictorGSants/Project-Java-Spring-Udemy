@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projectudemy.profnelioalves.entities.order;
+import com.projectudemy.profnelioalves.entities.Order;
 import com.projectudemy.profnelioalves.repositories.OrderRepository;
 
 @Service
@@ -18,11 +18,11 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public List<order> findAll() {
+    public List<Order> findAll() {
         return orderRepository.findAll();
     }
-    public order findById(long id){
-        Optional<order> obj = orderRepository.findById(id);
+    public Order findById(long id){
+        Optional<Order> obj = orderRepository.findById(id);
         return obj.get();
     }
 }
