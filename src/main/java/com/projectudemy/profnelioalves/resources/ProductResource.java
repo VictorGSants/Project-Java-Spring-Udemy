@@ -10,7 +10,7 @@ import com.projectudemy.profnelioalves.entities.Product;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 // Expõe endpoints REST para o cliente (ex: um app ou front-end).
 //
