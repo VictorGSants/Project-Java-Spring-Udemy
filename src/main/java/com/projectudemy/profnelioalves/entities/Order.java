@@ -13,6 +13,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "tb_order")
@@ -35,6 +38,11 @@ public class order implements Serializable {
     // This annotation indicates that this field is a foreign key
     // and it references the User entity
     private User client;
+
+
+    @OneToMany(mappedBy = "id.order")
+    // This annotation indicates that this field is a one-to-many relationship
+    private Set<OrderItem> itens = new HashSet<>();
 
     public order() {}
 
@@ -80,6 +88,10 @@ public class order implements Serializable {
     public void setClient(User client) {
         this.client = client;
     }
+    public Set<OrderItem> getItens() {
+        return itens;
+    }
+
 
     @Override
     public int hashCode() {

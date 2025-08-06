@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 
 import com.projectudemy.profnelioalves.entities.order;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projectudemy.profnelioalves.entities.Product;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 
 import jakarta.persistence.ManyToOne;
+
 
 @Embeddable
 public class OrderItemPK implements Serializable {

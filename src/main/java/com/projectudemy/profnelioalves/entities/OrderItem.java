@@ -1,5 +1,6 @@
 package com.projectudemy.profnelioalves.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projectudemy.profnelioalves.entities.PK.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -11,9 +12,8 @@ import jakarta.persistence.Table;
 public class OrderItem implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
-    
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK(); // Initialize the composite key
 
     private Integer quantity;
     private Double price;
@@ -28,7 +28,7 @@ public class OrderItem implements java.io.Serializable {
         this.quantity = quantity;
         this.price = price;
     }
-
+    @JsonIgnore
     public order getOrder(){
         return id.getOrder();
     } 

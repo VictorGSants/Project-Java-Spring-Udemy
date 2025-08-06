@@ -16,8 +16,10 @@ import com.projectudemy.profnelioalves.repositories.CategoryRepository;
 import com.projectudemy.profnelioalves.repositories.OrderRepository;
 import com.projectudemy.profnelioalves.repositories.ProductRepository;
 import com.projectudemy.profnelioalves.entities.Category;
+import com.projectudemy.profnelioalves.entities.OrderItem;
 import com.projectudemy.profnelioalves.entities.Product;
 import com.projectudemy.profnelioalves.entities.enuns.OrderStatus;
+import com.projectudemy.profnelioalves.repositories.OrderItemRepository;
 
 
 @Configuration
@@ -37,6 +39,9 @@ public class TestConfig<Z> implements CommandLineRunner{
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     // tudo que colocar aqui vai ser executado quando o perfil de teste for ativado
     // Isso é útil para popular o banco de dados com dados de teste ou configurar mocks
@@ -81,6 +86,14 @@ public class TestConfig<Z> implements CommandLineRunner{
         userRepositoriy.saveAll(Arrays.asList(u1, u2));
         // Aqui, estamos salvando dois usuários no repositório de usuários
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+        
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+        // Aqui, estamos criando itens de pedido (OrderItem) que associam pedidos a produtos
         
     }
     
