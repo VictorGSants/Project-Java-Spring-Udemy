@@ -7,12 +7,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+    
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
@@ -32,6 +38,8 @@ public class Product implements Serializable {
     private Set<Category> categories = new HashSet<>();
     // instanciamos para garantir que a lista não seja nula
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> itens = new HashSet<>();
 
     public Product() {}
 
@@ -44,7 +52,6 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
         // nao colocamos a categoria aqui, pois ela é uma lista de categorias ja instanciada
     }
-
 
     public Long getId() {
         return id;
@@ -98,6 +105,14 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+    @JsonIgnore
+    public Set<order> getOrders() {
+        Set<order> set = new HashSet<>();
+        for (OrderItem x : itens){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
 

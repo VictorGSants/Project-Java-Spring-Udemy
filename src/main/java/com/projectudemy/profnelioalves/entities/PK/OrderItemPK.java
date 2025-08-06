@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 
 import com.projectudemy.profnelioalves.entities.order;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.projectudemy.profnelioalves.entities.Product;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Embeddable
@@ -24,6 +26,8 @@ public class OrderItemPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+  
 
     public order getOrder() {
         return order;
