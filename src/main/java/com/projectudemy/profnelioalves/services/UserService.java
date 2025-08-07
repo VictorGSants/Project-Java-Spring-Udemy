@@ -34,7 +34,13 @@ public class UserService {
         Optional<User> obj = userRepositoriy.findById(id);
         return obj.get();
         // esse método busca um usuário pelo ID
-        
+    }
+    public User insert(User obj){
+        return userRepositoriy.save(obj);
+        // esse método insere um novo usuário no banco de dados
+        // o método save() é herdado da interface JpaRepository
+        // e o Spring Data JPA cuida de gerar a consulta SQL
+        // para inserir o usuário no banco de dados
     }
     
 }

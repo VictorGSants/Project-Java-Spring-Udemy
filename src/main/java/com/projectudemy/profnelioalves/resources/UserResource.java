@@ -1,5 +1,6 @@
 package com.projectudemy.profnelioalves.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projectudemy.profnelioalves.entities.User;
 import com.projectudemy.profnelioalves.services.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 @RestController
 @RequestMapping("/users")
@@ -32,5 +38,14 @@ public class UserResource {
         return ResponseEntity.ok().body(user);
         // se o usuário for encontrado, retorna o usuário
     }
+    @PostMapping
+    public ResponseEntity <User> insert(@RequestBody User obj) {
+        User newUser = userService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUser.getId()).toUri();
+        
+        // este método insere um novo usuário no banco de dados
+        return ResponseEntity.created(uri).body(newUser);
+    }
+    
     
 }
