@@ -62,6 +62,11 @@ public class OrderItem implements java.io.Serializable {
         this.price = price;
     }
 
+    public Double getSubTotal(){
+        double subTotal = price * quantity;
+        return subTotal;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -86,6 +91,5 @@ public class OrderItem implements java.io.Serializable {
             return false;
         return true;
     }
-    
-    
+
 }
