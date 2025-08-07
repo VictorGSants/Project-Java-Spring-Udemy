@@ -42,5 +42,12 @@ public class UserService {
         // e o Spring Data JPA cuida de gerar a consulta SQL
         // para inserir o usuário no banco de dados
     }
+    public void delete(Long id){
+        userRepositoriy.deleteById(id);
+        // esse método deleta um usuário pelo ID
+        // o método deleteById() é herdado da interface JpaRepository
+        // e o Spring Data JPA cuida de gerar a consulta SQL
+        // para deletar o usuário do banco de dados
+    }
     
 }
