@@ -49,5 +49,16 @@ public class UserService {
         // e o Spring Data JPA cuida de gerar a consulta SQL
         // para deletar o usuário do banco de dados
     }
+    public User update(Long id, User obj){
+        User entity = userRepositoriy.getReferenceById(id);
+        updateData(entity, obj);
+        return userRepositoriy.save(entity);
+    }
+    private void updateData(User entity, User obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+
+    }
     
 }

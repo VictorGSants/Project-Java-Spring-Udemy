@@ -16,6 +16,8 @@ import com.projectudemy.profnelioalves.entities.User;
 import com.projectudemy.profnelioalves.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -52,6 +54,11 @@ public class UserResource {
         userService.delete(id);
         return ResponseEntity.noContent().build();
         // este método deleta um usuário específico do banco de dados
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity <User> update(@PathVariable Long id, @RequestBody User entity) {
+       entity = userService.update(id, entity);
+        return ResponseEntity.ok().body(entity);
     }
     
 }
