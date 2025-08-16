@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.projectudemy.profnelioalves.entities.User;
 import com.projectudemy.profnelioalves.repositories.UserRepositoriy;
+import com.projectudemy.profnelioalves.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -32,7 +33,7 @@ public class UserService {
     }
     public User findById(long id){
         Optional<User> obj = userRepositoriy.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
         // esse método busca um usuário pelo ID
     }
     public User insert(User obj){
